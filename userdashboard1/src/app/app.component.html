@@ -1,0 +1,56 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class='container'>
+    <h2>User Data</h2>
+    <div class='row'>
+  <form novalidate (ngSubmit)="onSubmit()" [formGroup]="userFrm">            
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" class="form-control" placeholder="First Name" formControlName="FirstName">
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" placeholder="Last Name" formControlName="LastName">
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <select formControlName="Gender" class="form-control">
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>           
+        <div>
+            <button type="submit" [disabled]="userFrm.invalid" class="btn btn-primary">{{btnName}}</button>
+        </div>  
+</form>
+</div>
+<div class='table-responsive'>
+    <table class='table table-striped' *ngIf='users && users.length'>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.FirstName}}</td>
+                <td>{{user.LastName}}</td>
+                <td>{{user.Gender}}</td>
+                <td>
+                    <button title="Edit" class="btn btn-primary" (click)="editUser(user)">Edit</button>
+                    <button title="Delete" class="btn btn-danger" (click)="deleteUser(user.Id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissible">
+        <span class="sr-only">Error:</span>
+        {{msg}}
+    </div>
+  
+</div>
+</div>
+
+
